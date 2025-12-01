@@ -1,0 +1,501 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mae Younes | Computer Vision</title>
+    
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <!-- Google Fonts: Inter for a clean academic look -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
+    
+    <!-- Font Awesome for Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                    },
+                    colors: {
+                        // Customizing the black theme
+                        background: '#050505', // Very deep charcoal/black
+                        surface: '#121212',    // Slightly lighter for cards
+                        primary: '#3b82f6',    // Blue accent for links
+                        secondary: '#a1a1aa',  // Gray text
+                    }
+                }
+            }
+        }
+    </script>
+    
+    <style>
+        /* Custom scrollbar for webkit */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #050505; 
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #333; 
+            border-radius: 4px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: #555; 
+        }
+        
+        /* Hide scrollbar for the sidebar on desktop */
+        .no-scrollbar::-webkit-scrollbar {
+            display: none;
+        }
+        .no-scrollbar {
+            -ms-overflow-style: none;
+            scrollbar-width: none;
+        }
+    </style>
+</head>
+<body class="bg-background text-gray-300 font-sans selection:bg-primary selection:text-white">
+
+    <div class="flex flex-col md:flex-row min-h-screen">
+
+        <!-- ========================================== -->
+        <!-- LEFT SIDEBAR (Fixed info)                  -->
+        <!-- ========================================== -->
+        <aside class="w-full md:w-1/4 md:fixed md:h-screen border-b md:border-b-0 md:border-r border-zinc-800 bg-black z-20 flex flex-col items-center justify-center p-8 text-center md:overflow-y-auto no-scrollbar">
+            
+            <!-- Profile Image Container -->
+            <div class="mb-6 relative group">
+                <div class="w-48 h-48 rounded-full overflow-hidden border-4 border-zinc-800 shadow-2xl relative bg-zinc-900">
+                    <img src="./images/profile.jpg" 
+                         alt="Researcher Profile" 
+                         class="w-full h-full object-cover opacity-90 group-hover:opacity-100 transition-opacity duration-300"
+                         onerror="this.src='https://ui-avatars.com/api/?name=Mae+Younes&background=333&color=fff&size=256'">
+                </div>
+            </div>
+
+            <!-- Name & Title -->
+            <h1 class="text-3xl font-bold text-white tracking-tight mb-2">Mae Younes</h1>
+            <p class="text-secondary font-light text-lg mb-4">Computer Vision Researcher</p>
+
+            <!-- Current Position -->
+            <div class="text-sm text-zinc-400 mb-6 space-y-1">
+                <p>Research Scientist</p>
+                <p class="font-semibold text-zinc-200">INRIA France</p>
+            </div>
+
+            <!-- Contact & Social Links -->
+            <div class="flex gap-4 mb-8">
+                <a href="mailto:mae.younes.work@pm.me" class="text-zinc-400 hover:text-white transition-colors text-xl" title="Email">
+                    <i class="fas fa-envelope"></i>
+                </a>
+                <a href="https://github.com/maeyounes" target="_blank" class="text-zinc-400 hover:text-white transition-colors text-xl" title="GitHub">
+                    <i class="fab fa-github"></i>
+                </a>
+                <a href="#" target="_blank" class="text-zinc-400 hover:text-white transition-colors text-xl" title="Google Scholar">
+                    <i class="fas fa-graduation-cap"></i>
+                </a>
+                <a href="https://www.linkedin.com/in/mae-younes" target="_blank" class="text-zinc-400 hover:text-white transition-colors text-xl" title="LinkedIn">
+                    <i class="fab fa-linkedin"></i>
+                </a>
+            </div>
+
+            <!-- Short Bio / Intro -->
+            <p class="text-sm text-zinc-500 leading-relaxed max-w-xs mx-auto">
+                I am interested in inverse rendering, 3D surface reconstruction from images, neural radiance fields (NeRF) and Gaussian Splatting. 
+            </p>
+
+            <!-- Navigation (Optional, for internal page jumps) -->
+            <nav class="mt-12 hidden md:block">
+                <ul class="space-y-2 text-sm font-medium">
+                    <li><a href="#news" class="hover:text-primary transition-colors">News</a></li>
+                    <li><a href="#publications" class="hover:text-primary transition-colors">Publications</a></li>
+                    <!-- <li><a href="#misc" class="hover:text-primary transition-colors">Misc</a></li> -->
+                </ul>
+            </nav>
+
+            <div class="mt-auto pt-8 text-xs text-zinc-700">
+                &copy; 2025 Mae Younes
+            </div>
+        </aside>
+
+        <!-- ========================================== -->
+        <!-- RIGHT CONTENT (Scrollable)                 -->
+        <!-- ========================================== -->
+        <main class="w-full md:w-3/4 md:ml-[25%] p-6 md:p-12 lg:p-16">
+            
+            <!-- NEWS SECTION -->
+            <section id="news" class="mb-16 animate-fade-in-up">
+                <h2 class="text-2xl font-bold text-white mb-6 border-b border-zinc-800 pb-2 flex items-center">
+                    <span class="bg-primary w-2 h-8 mr-3 rounded-sm"></span> News
+                </h2>
+                <ul class="space-y-4 text-zinc-400 text-sm md:text-base">
+                    <li class="flex items-start">
+                        <span class="font-mono text-primary mr-4 min-w-[80px]">Dec 2025</span>
+                        <span>Released code for our AA-2DGS project.</span>
+                    </li>
+                    <li class="flex items-start">
+                        <span class="font-mono text-primary mr-4 min-w-[80px]">Nov 2025</span>
+                        <span>One paper accepted to <strong class="text-white">3DV 2026</strong> !</span>
+                    </li>
+                    <li class="flex items-start">
+                        <span class="font-mono text-primary mr-4 min-w-[80px]">Sep 2025</span>
+                        <span>One paper accepted to <strong class="text-white">NeurIPS 2025</strong> !</span>
+                    </li>
+                </ul>
+            </section>
+
+            <!-- PUBLICATIONS SECTION -->
+            <section id="publications" class="mb-16">
+                <h2 class="text-2xl font-bold text-white mb-8 border-b border-zinc-800 pb-2 flex items-center">
+                    <span class="bg-primary w-2 h-8 mr-3 rounded-sm"></span> Publications
+                </h2>
+
+                <div class="flex flex-col space-y-10">
+
+                    <div class="group flex flex-col lg:flex-row gap-6 items-start">
+                        
+                        <!-- Wide Image Teaser -->
+                        <!-- Recommended size: 600x300px or similar aspect ratio -->
+                        <div class="w-full lg:w-1/3 shrink-0 rounded-lg overflow-hidden border border-zinc-800 bg-surface">
+                            <img src="./images/papers/aa2dgs.png" 
+                                 alt="Teaser Image" 
+                                 class="w-full h-auto object-cover hover:scale-105 transition-transform duration-500"
+                                 onerror="this.onerror=null; this.parentElement.innerHTML='<div class=\'h-32 flex items-center justify-center text-zinc-600 bg-zinc-900 text-xs\'>Teaser Image Not Found</div>'">
+                        </div>
+
+                        <!-- Content -->
+                        <div class="flex-1">
+                            <h3 class="text-xl font-bold text-white hover:text-primary transition-colors leading-tight mb-2">
+                                <a href="https://arxiv.org/abs/2506.11252">Anti-Aliased 2D Gaussian Splatting</a>
+                            </h3>
+                            
+                            <p class="text-zinc-400 mb-2 text-sm">
+                                <strong>Mae Younes</strong>, Adnane Boukhayma
+                            </p>
+                            
+                            <p class="text-zinc-300 italic mb-3 text-sm">
+                                Conference on Neural Information Processing Systems (NeurIPS), 2025
+                                <!-- <span class="ml-2 inline-block px-2 py-0.5 rounded text-[10px] font-bold bg-red-900 text-red-200">HIGHTEXT</span> -->
+                            </p>
+                            
+                            <div class="flex flex-wrap gap-3 text-sm font-medium">
+                                <a href="https://arxiv.org/pdf/2506.11252" class="flex items-center text-zinc-400 hover:text-white transition-colors">
+                                    <i class="far fa-file-pdf mr-1.5"></i> PDF
+                                </a>
+                                <a href="https://github.com/maeyounes/AA-2DGS" class="flex items-center text-zinc-400 hover:text-white transition-colors">
+                                    <i class="fab fa-github mr-1.5"></i> Code
+                                </a>
+                                <button class="flex items-center text-zinc-400 hover:text-white transition-colors cursor-pointer" onclick="toggleBibtex('bib1')">
+                                    <i class="fas fa-quote-right mr-1.5"></i> BibTeX
+                                </button>
+                            </div>
+
+                            <!-- Hidden BibTeX Block -->
+                            <div id="bib1" class="hidden mt-4 p-3 bg-zinc-900 rounded border border-zinc-800 text-xs font-mono text-zinc-400 overflow-x-auto">
+@inproceedings{younes2025anti,
+  title={Anti-Aliased 2D Gaussian Splatting},
+  author={Younes, Mae and Boukhayma, Adnane},
+  booktitle={The Thirty-ninth Annual Conference on Neural Information Processing Systems},
+  year={2025}
+}
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="group flex flex-col lg:flex-row gap-6 items-start border-t border-zinc-900 pt-8">
+                        
+                        <div class="w-full lg:w-1/3 shrink-0 rounded-lg overflow-hidden border border-zinc-800 bg-surface">
+                            <img src="./images/papers/texsplat.png" 
+                                 alt="Teaser Image" 
+                                 class="w-full h-auto object-cover hover:scale-105 transition-transform duration-500"
+                                 onerror="this.onerror=null; this.parentElement.innerHTML='<div class=\'h-32 flex items-center justify-center text-zinc-600 bg-zinc-900 text-xs\'>Teaser Image Not Found</div>'">
+                        </div>
+
+                        <div class="flex-1">
+                            <h3 class="text-xl font-bold text-white hover:text-primary transition-colors leading-tight mb-2">
+                                <a href="https://arxiv.org/abs/2506.13348">TextureSplat: Per-Primitive Texture Mapping for Reflective Gaussian Splatting</a>
+                            </h3>
+                            
+                            <p class="text-zinc-400 mb-2 text-sm">
+                               <strong>Mae Younes</strong>, Adnane Boukhayma
+                            </p>
+                            
+                            <p class="text-zinc-300 italic mb-3 text-sm">
+                                International Conference on 3D Vision (3DV), 2026
+                            </p>
+                            
+                            <div class="flex flex-wrap gap-3 text-sm font-medium">
+                                <a href="https://arxiv.org/pdf/2506.13348" class="flex items-center text-zinc-400 hover:text-white transition-colors">
+                                    <i class="far fa-file-pdf mr-1.5"></i> PDF
+                                </a>
+                                <a href="https://github.com/maeyounes/TextureSplat" class="flex items-center text-zinc-400 hover:text-white transition-colors">
+                                    <i class="fab fa-github mr-1.5"></i> Code
+                                </a>
+                                <button class="flex items-center text-zinc-400 hover:text-white transition-colors cursor-pointer" onclick="toggleBibtex('bib2')">
+                                    <i class="fas fa-quote-right mr-1.5"></i> BibTeX
+                                </button>
+                            </div>
+
+                            <div id="bib2" class="hidden mt-4 p-3 bg-zinc-900 rounded border border-zinc-800 text-xs font-mono text-zinc-400 overflow-x-auto">
+@article{younes2025texturesplat,
+  title={TextureSplat: Per-Primitive Texture Mapping for Reflective Gaussian Splatting},
+  author={Younes, Mae and Boukhayma, Adnane},
+  journal={arXiv preprint arXiv:2506.13348},
+  year={2025}
+}
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+
+                    <div class="group flex flex-col lg:flex-row gap-6 items-start border-t border-zinc-900 pt-8">
+                        
+                        <div class="w-full lg:w-1/3 shrink-0 rounded-lg overflow-hidden border border-zinc-800 bg-surface">
+                            <img src="./images/papers/sparfels.png" 
+                                 alt="Teaser Image" 
+                                 class="w-full h-auto object-cover hover:scale-105 transition-transform duration-500"
+                                 onerror="this.onerror=null; this.parentElement.innerHTML='<div class=\'h-32 flex items-center justify-center text-zinc-600 bg-zinc-900 text-xs\'>Teaser Image Not Found</div>'">
+                        </div>
+
+                        <div class="flex-1">
+                            <h3 class="text-xl font-bold text-white hover:text-primary transition-colors leading-tight mb-2">
+                                <a href="https://arxiv.org/abs/2505.02178">Sparfels: Fast Reconstruction from Sparse Unposed Imagery</a>
+                            </h3>
+                            
+                            <p class="text-zinc-400 mb-2 text-sm">
+                               Shubhendu Jena, Amine Ouasfi, <strong>Mae Younes</strong>, Adnane Boukhayma
+                            </p>
+                            
+                            <p class="text-zinc-300 italic mb-3 text-sm">
+                                International Conference on Computer Vision (ICCV), 2025
+                                 <span class="ml-2 inline-block px-2 py-0.5 rounded text-[10px] font-bold bg-red-900 text-red-200">Highlight</span>
+                            </p>
+                            
+                            <div class="flex flex-wrap gap-3 text-sm font-medium">
+                                <a href="https://arxiv.org/pdf/2505.02178" class="flex items-center text-zinc-400 hover:text-white transition-colors">
+                                    <i class="far fa-file-pdf mr-1.5"></i> PDF
+                                </a>
+                                <a href="https://github.com/Shubhendu-Jena/Sparfels" class="flex items-center text-zinc-400 hover:text-white transition-colors">
+                                    <i class="fab fa-github mr-1.5"></i> Code
+                                </a>
+                                <a href="https://shubhendu-jena.github.io/Sparfels-web/" class="flex items-center text-zinc-400 hover:text-white transition-colors">
+                                    <i class="fas fa-globe mr-1.5"></i> Project Page
+                                </a>
+                                <button class="flex items-center text-zinc-400 hover:text-white transition-colors cursor-pointer" onclick="toggleBibtex('bib3')">
+                                    <i class="fas fa-quote-right mr-1.5"></i> BibTeX
+                                </button>
+                            </div>
+
+                            <div id="bib3" class="hidden mt-4 p-3 bg-zinc-900 rounded border border-zinc-800 text-xs font-mono text-zinc-400 overflow-x-auto">
+@InProceedings{Jena_2025_ICCV,
+    author    = {Jena, Shubhendu and Ouasfi, Amine and Younes, Mae and Boukhayma, Adnane},
+    title     = {Sparfels: Fast Reconstruction from Sparse Unposed Imagery},
+    booktitle = {Proceedings of the IEEE/CVF International Conference on Computer Vision (ICCV)},
+    month     = {October},
+    year      = {2025},
+    pages     = {27476-27487}
+}
+                            </div>
+                        </div>
+                    </div>
+
+
+                <div class="group flex flex-col lg:flex-row gap-6 items-start border-t border-zinc-900 pt-8">
+                        
+                        <div class="w-full lg:w-1/3 shrink-0 rounded-lg overflow-hidden border border-zinc-800 bg-surface">
+                            <img src="./images/papers/sparsecraft.png" 
+                                 alt="Teaser Image" 
+                                 class="w-full h-auto object-cover hover:scale-105 transition-transform duration-500"
+                                 onerror="this.onerror=null; this.parentElement.innerHTML='<div class=\'h-32 flex items-center justify-center text-zinc-600 bg-zinc-900 text-xs\'>Teaser Image Not Found</div>'">
+                        </div>
+
+                        <div class="flex-1">
+                            <h3 class="text-xl font-bold text-white hover:text-primary transition-colors leading-tight mb-2">
+                                <a href="https://arxiv.org/abs/2407.14257">SparseCraft: Few-Shot Neural Reconstruction through Stereopsis Guided Geometric Linearization</a>
+                            </h3>
+                            
+                            <p class="text-zinc-400 mb-2 text-sm">
+                                <strong>Mae Younes</strong>, Amine Ouasfi, Adnane Boukhayma
+                            </p>
+                            
+                            <p class="text-zinc-300 italic mb-3 text-sm">
+                                European Conference on Computer Vision (ECCV), 2024
+                            </p>
+                            
+                            <div class="flex flex-wrap gap-3 text-sm font-medium">
+                                <a href="https://sparsecraft.github.io/assets/paper/paper.pdf" class="flex items-center text-zinc-400 hover:text-white transition-colors">
+                                    <i class="far fa-file-pdf mr-1.5"></i> PDF
+                                </a>
+                                <a href="https://github.com/maeyounes/SparseCraft" class="flex items-center text-zinc-400 hover:text-white transition-colors">
+                                    <i class="fab fa-github mr-1.5"></i> Code
+                                </a>
+                                <a href="https://sparsecraft.github.io/" class="flex items-center text-zinc-400 hover:text-white transition-colors">
+                                    <i class="fas fa-globe mr-1.5"></i> Project Page
+                                </a>
+                                <button class="flex items-center text-zinc-400 hover:text-white transition-colors cursor-pointer" onclick="toggleBibtex('bib4')">
+                                    <i class="fas fa-quote-right mr-1.5"></i> BibTeX
+                                </button>
+                            </div>
+
+                            <div id="bib4" class="hidden mt-4 p-3 bg-zinc-900 rounded border border-zinc-800 text-xs font-mono text-zinc-400 overflow-x-auto">
+@inproceedings{younes2024sparsecraft,
+  title={Sparsecraft: Few-shot neural reconstruction through stereopsis guided geometric linearization},
+  author={Younes, Mae and Ouasfi, Amine and Boukhayma, Adnane},
+  booktitle={European Conference on Computer Vision},
+  pages={37--56},
+  year={2024},
+  organization={Springer}
+}
+                            </div>
+                        </div>
+                    </div>
+
+            <div class="group flex flex-col lg:flex-row gap-6 items-start border-t border-zinc-900 pt-8">
+                        
+                        <div class="w-full lg:w-1/3 shrink-0 rounded-lg overflow-hidden border border-zinc-800 bg-surface">
+                            <img src="./images/papers/maaip.png" 
+                                 alt="Teaser Image" 
+                                 class="w-full h-auto object-cover hover:scale-105 transition-transform duration-500"
+                                 onerror="this.onerror=null; this.parentElement.innerHTML='<div class=\'h-32 flex items-center justify-center text-zinc-600 bg-zinc-900 text-xs\'>Teaser Image Not Found</div>'">
+                        </div>
+
+                        <div class="flex-1">
+                            <h3 class="text-xl font-bold text-white hover:text-primary transition-colors leading-tight mb-2">
+                                <a href="https://dl.acm.org/doi/10.1145/3606926">MAAIP: Multi-Agent Adversarial Interaction Priors for imitation from fighting demonstrations for physics-based characters</a>
+                            </h3>
+                            
+                            <p class="text-zinc-400 mb-2 text-sm">
+                                <strong>Mohamed Younes</strong>, Ewa Kijak, Richard Kulpa, Simon Malinowski, Franck Multon
+                            </p>
+                            
+                            <p class="text-zinc-300 italic mb-3 text-sm">
+                                the 22nd ACM SIGGRAPH/EUROGRAPHICS Symposium on Computer Animation (SCA), 2023
+                            </p>
+                            
+                            <div class="flex flex-wrap gap-3 text-sm font-medium">
+                                <a href="https://www.youtube.com/watch?v=wQfIiw_rQ3w" class="flex items-center text-zinc-400 hover:text-white transition-colors">
+                                    <i class="fab fa-youtube mr-1.5"></i> Video
+                                </a>
+                                <a href="https://dl.acm.org/doi/10.1145/3606926" class="flex items-center text-zinc-400 hover:text-white transition-colors">
+                                    <i class="fas fa-globe mr-1.5"></i> Paper
+                                </a>
+                                <button class="flex items-center text-zinc-400 hover:text-white transition-colors cursor-pointer" onclick="toggleBibtex('bib5')">
+                                    <i class="fas fa-quote-right mr-1.5"></i> BibTeX
+                                </button>
+                            </div>
+
+                            <div id="bib5" class="hidden mt-4 p-3 bg-zinc-900 rounded border border-zinc-800 text-xs font-mono text-zinc-400 overflow-x-auto">
+@article{10.1145/3606926,
+author = {Younes, Mohamed and Kijak, Ewa and Kulpa, Richard and Malinowski, Simon and Multon, Franck},
+title = {MAAIP: Multi-Agent Adversarial Interaction Priors for imitation from fighting demonstrations for physics-based characters},
+year = {2023},
+publisher = {Association for Computing Machinery},
+url = {https://doi.org/10.1145/3606926},
+doi = {10.1145/3606926},
+journal = {Proc. ACM Comput. Graph. Interact. Tech.},
+month = aug,
+keywords = {Adversarial Imitation learning, Character Animation, Motion Capture, Multi-Agent Reinforcement Learning, Physics-based Simulation}
+}
+
+  
+                            </div>
+                        </div>
+                    </div>
+
+                            <div class="group flex flex-col lg:flex-row gap-6 items-start border-t border-zinc-900 pt-8">
+                        
+                        <div class="w-full lg:w-1/3 shrink-0 rounded-lg overflow-hidden border border-zinc-800 bg-surface">
+                            <img src="./images/papers/aip.png" 
+                                 alt="Teaser Image" 
+                                 class="w-full h-auto object-cover hover:scale-105 transition-transform duration-500"
+                                 onerror="this.onerror=null; this.parentElement.innerHTML='<div class=\'h-32 flex items-center justify-center text-zinc-600 bg-zinc-900 text-xs\'>Teaser Image Not Found</div>'">
+                        </div>
+
+                        <div class="flex-1">
+                            <h3 class="text-xl font-bold text-white hover:text-primary transition-colors leading-tight mb-2">
+                                <a href="https://dl.acm.org/doi/10.1145/3550082.3564207">AIP: Adversarial Interaction Priors for Multi-Agent Physics-based Character Control</a>
+                            </h3>
+                            
+                            <p class="text-zinc-400 mb-2 text-sm">
+                                <strong>Mohamed Younes</strong>, Ewa Kijak, Richard Kulpa, Simon Malinowski, Franck Multon
+                            </p>
+                            
+                            <p class="text-zinc-300 italic mb-3 text-sm">
+                                SIGGRAPH Asia Posters, 2022
+                            </p>
+                            
+                            <div class="flex flex-wrap gap-3 text-sm font-medium">
+                                <a href="https://dl.acm.org/doi/10.1145/3550082.3564207" class="flex items-center text-zinc-400 hover:text-white transition-colors">
+                                    <i class="fas fa-globe mr-1.5"></i> Poster
+                                </a>
+                                <button class="flex items-center text-zinc-400 hover:text-white transition-colors cursor-pointer" onclick="toggleBibtex('bib6')">
+                                    <i class="fas fa-quote-right mr-1.5"></i> BibTeX
+                                </button>
+                            </div>
+
+                            <div id="bib6" class="hidden mt-4 p-3 bg-zinc-900 rounded border border-zinc-800 text-xs font-mono text-zinc-400 overflow-x-auto">
+@inproceedings{10.1145/3550082.3564207,
+author = {Younes, Mohamed and Kijak, Ewa and Malinowski, Simon and Kulpa, Richard and Multon, Franck},
+title = {AIP: Adversarial Interaction Priors for Multi-Agent Physics-based Character Control},
+year = {2022},
+publisher = {Association for Computing Machinery},
+url = {https://doi.org/10.1145/3550082.3564207},
+doi = {10.1145/3550082.3564207},
+booktitle = {SIGGRAPH Asia 2022 Posters},
+keywords = {Adversarial Imitation learning, Character Animation, Motion Capture, Multi-Agent Reinforcement Learning, Physics-based Simulation},
+location = {Daegu, Republic of Korea},
+series = {SA '22}
+}
+
+  
+                            </div>
+                        </div>
+                    </div>
+
+
+                </div> 
+            </section>
+
+            <!-- MISC / ACADEMIC SERVICE SECTION -->
+            <!-- <section id="misc" class="mb-12">
+                <h2 class="text-2xl font-bold text-white mb-6 border-b border-zinc-800 pb-2 flex items-center">
+                    <span class="bg-primary w-2 h-8 mr-3 rounded-sm"></span> Academic Service
+                </h2>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-4 text-zinc-400 text-sm">
+                    <div>
+                        <h4 class="text-white font-semibold mb-2">Conference Reviewer</h4>
+                        <ul class="list-disc list-inside space-y-1">
+                            <li>CVPR 2023, 2024</li>
+                        </ul>
+                    </div>
+                    <div>
+                        <h4 class="text-white font-semibold mb-2">Teaching Assistant</h4>
+                        <ul class="list-disc list-inside space-y-1">
+                            <li></li>
+                        </ul>
+                    </div>
+                </div>
+            </section> -->
+
+        </main>
+    </div>
+
+    <!-- Simple Script for BibTeX Toggle -->
+    <script>
+        function toggleBibtex(id) {
+            const element = document.getElementById(id);
+            if (element.classList.contains('hidden')) {
+                element.classList.remove('hidden');
+            } else {
+                element.classList.add('hidden');
+            }
+        }
+    </script>
+</body>
+</html>
